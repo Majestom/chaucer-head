@@ -19,16 +19,14 @@ function App() {
   const [publisher, setPublisher] = useState("")
   const [bookList, setBookList] = useState([])
 
-  const updateTitle = (e) => {
-    setBookTitle(e.target.value)
-  }
-
-  const updateAuthor = (e) => {
-    setAuthor(e.target.value)
-  }
-
-  const updatePublisher = (e) => {
-    setPublisher(e.target.value)
+  const updateCell = (e) => {
+    if (e.target.id === "book-title") {
+      setBookTitle(e.target.value)
+    } else if (e.target.id === "author") {
+      setAuthor(e.target.value)
+    } else if (e.target.id === "publisher") {
+      setPublisher(e.target.value)
+    }
   }
 
   const addBook = () => {
@@ -48,21 +46,21 @@ function App() {
         id={"book-title"}
         label={"Book Title"}
         variant={"outlined"}
-        onChange={updateTitle}
+        onChange={updateCell}
         value={bookTitle}
       />
       <TextField
         id={"author"}
         label={"Author"}
         variant={"outlined"}
-        onChange={updateAuthor}
+        onChange={updateCell}
         value={author}
       />
       <TextField
         id={"publisher"}
         label={"Publisher"}
         variant={"outlined"}
-        onChange={updatePublisher}
+        onChange={updateCell}
         value={publisher}
       />
       <Box m={2} pt={3}>
@@ -79,7 +77,7 @@ function App() {
       </Box>
       <Table>
         {bookList.map((book) => (
-          <TableRow>
+          <TableRow key={book.title}>
             <TableCell>{book.title}</TableCell>
             <TableCell>{book.author}</TableCell>
             <TableCell>{book.publisher}</TableCell>

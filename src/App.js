@@ -39,33 +39,27 @@ function App() {
     setPublisher("")
   }
 
+  const attribList = [
+    { id: "book-title", label: "Book Title" },
+    { id: "author", label: "Author" },
+    { id: "publisher", label: "Publisher" },
+  ]
+
   return (
     <div className="App">
       <BookRepo />
-      <TextField
-        id={"book-title"}
-        label={"Book Title"}
-        variant={"outlined"}
-        onChange={updateCell}
-        value={bookTitle}
-        autoComplete="off"
-      />
-      <TextField
-        id={"author"}
-        label={"Author"}
-        variant={"outlined"}
-        onChange={updateCell}
-        value={author}
-        autoComplete="off"
-      />
-      <TextField
-        id={"publisher"}
-        label={"Publisher"}
-        variant={"outlined"}
-        onChange={updateCell}
-        value={publisher}
-        autoComplete="off"
-      />
+      <Box>
+        {attribList.map((attrib) => (
+          <TextField
+            key={attrib.id}
+            id={attrib.id}
+            variant={"outlined"}
+            label={attrib.label}
+            onChange={updateCell}
+            autoComplete="off"
+          />
+        ))}
+      </Box>
       <Box m={2} pt={3}>
         <Button
           sx={{

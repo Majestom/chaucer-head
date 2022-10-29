@@ -48,6 +48,7 @@ function App() {
         variant={"outlined"}
         onChange={updateCell}
         value={bookTitle}
+        autoComplete="off"
       />
       <TextField
         id={"author"}
@@ -55,6 +56,7 @@ function App() {
         variant={"outlined"}
         onChange={updateCell}
         value={author}
+        autoComplete="off"
       />
       <TextField
         id={"publisher"}
@@ -62,6 +64,7 @@ function App() {
         variant={"outlined"}
         onChange={updateCell}
         value={publisher}
+        autoComplete="off"
       />
       <Box m={2} pt={3}>
         <Button

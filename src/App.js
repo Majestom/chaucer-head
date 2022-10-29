@@ -40,9 +40,9 @@ function App() {
   }
 
   const attribList = [
-    { id: "book-title", label: "Book Title" },
-    { id: "author", label: "Author" },
-    { id: "publisher", label: "Publisher" },
+    { id: "book-title", label: "Book Title", value: bookTitle },
+    { id: "author", label: "Author", value: author },
+    { id: "publisher", label: "Publisher", value: publisher },
   ]
 
   return (
@@ -53,8 +53,9 @@ function App() {
           <TextField
             key={attrib.id}
             id={attrib.id}
-            variant={"outlined"}
             label={attrib.label}
+            value={attrib.value}
+            variant={"outlined"}
             onChange={updateCell}
             autoComplete="off"
           />

@@ -7,6 +7,7 @@ import {
   Table,
   TableRow,
   TableCell,
+  TableHead,
 } from "@mui/material"
 
 const BookRepo = () => {
@@ -73,9 +74,19 @@ function App() {
           Add Book
         </Button>
       </Box>
-      <Table>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            {attribList.map((attrib) => (
+              <TableCell key={attrib.label}>{attrib.label}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
         {bookList.map((book) => (
-          <TableRow key={book.title}>
+          <TableRow
+            key={book.title}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          >
             <TableCell>{book.title}</TableCell>
             <TableCell>{book.author}</TableCell>
             <TableCell>{book.publisher}</TableCell>

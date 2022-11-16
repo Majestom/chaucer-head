@@ -11,6 +11,8 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material"
+import { DataGrid } from "@mui/x-data-grid"
+import Avatar from "@mui/material/Avatar"
 
 const BookRepo = () => {
   return <h1>Chaucer Head Book Repository</h1>
@@ -21,6 +23,39 @@ function App() {
   const [author, setAuthor] = useState("")
   const [publisher, setPublisher] = useState("")
   const [bookList, setBookList] = useState([])
+
+  // For DataGrid:
+  const rows = [
+    {
+      id: 1,
+      cover: {
+        avatar: "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
+      },
+      title: "Strata",
+      author: "Terry Pratchett",
+      publisher: "Orbit",
+    },
+  ]
+
+  // For DataGrid:
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "cover",
+      headerName: "Cover",
+      width: 80,
+      renderCell: (params) => {
+        return (
+          <>
+            <Avatar src={params.value.avatar} />
+          </>
+        )
+      },
+    },
+    { field: "title", headerName: "Title", width: 250 },
+    { field: "author", headerName: "Author", width: 250 },
+    { field: "publisher", headerName: "Publisher", width: 100 },
+  ]
 
   const updateCell = (e) => {
     if (e.target.id === "book-title") {
@@ -79,6 +114,17 @@ function App() {
           Add Book
         </Button>
       </Box>
+      <div style={{ height: 350, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+          experimentalFeatures={{ newEditingApi: true }}
+        />
+      </div>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

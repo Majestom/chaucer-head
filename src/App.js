@@ -8,6 +8,8 @@ import {
   TableRow,
   TableCell,
   TableHead,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material"
 
 const BookRepo = () => {
@@ -61,6 +63,9 @@ function App() {
             autoComplete="off"
           />
         ))}
+        <Box>
+          <FormControlLabel control={<Checkbox />} label="First Edition" />
+        </Box>
       </Box>
       <Box m={2} pt={3}>
         <Button

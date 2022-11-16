@@ -12,7 +12,6 @@ import {
   Checkbox,
 } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
-import Avatar from "@mui/material/Avatar"
 
 const BookRepo = () => {
   return <h1>Chaucer Head Book Repository</h1>
@@ -30,10 +29,24 @@ function App() {
       id: 1,
       cover: {
         avatar: "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
+        title: "Strata",
       },
       title: "Strata",
       author: "Terry Pratchett",
       publisher: "Orbit",
+      price: "£1.00",
+    },
+    {
+      id: 2,
+      cover: {
+        avatar:
+          "https://upload.wikimedia.org/wikipedia/en/7/71/Ringworld%281stEd%29.jpg",
+        title: "Ringworld",
+      },
+      title: "Ringworld",
+      author: "Larry Niven",
+      publisher: "Orion",
+      price: "£2.00",
     },
   ]
 
@@ -47,7 +60,11 @@ function App() {
       renderCell: (params) => {
         return (
           <>
-            <Avatar src={params.value.avatar} />
+            <img
+              alt={params.value.title}
+              src={params.value.avatar}
+              Style="max-width:100%; max-height:100%;"
+            />
           </>
         )
       },
@@ -55,6 +72,7 @@ function App() {
     { field: "title", headerName: "Title", width: 250 },
     { field: "author", headerName: "Author", width: 250 },
     { field: "publisher", headerName: "Publisher", width: 100 },
+    { field: "price", headerName: "Price", width: 100 },
   ]
 
   const updateCell = (e) => {

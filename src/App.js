@@ -18,6 +18,7 @@ function App() {
   const [author, setAuthor] = useState("")
   const [publisher, setPublisher] = useState("")
   const [price, setPrice] = useState("")
+  const [first, setFirst] = useState(false)
 
   // For DataGrid:
   const [rows, setRows] = useState([
@@ -69,6 +70,7 @@ function App() {
     { field: "author", headerName: "Author", width: 250 },
     { field: "publisher", headerName: "Publisher", width: 100 },
     { field: "price", headerName: "Price", width: 100 },
+    { field: "first", headerName: "First Ed", width: 80 },
   ]
 
   const updateCell = (e) => {
@@ -80,6 +82,8 @@ function App() {
       setPublisher(e.target.value)
     } else if (e.target.id === "price") {
       setPrice(e.target.value)
+    } else if (e.target.id === "first") {
+      setFirst(e.target.value)
     }
   }
 
@@ -97,12 +101,18 @@ function App() {
         author: author,
         publisher: publisher,
         price: price,
+        first: first,
       },
     ])
     setBookTitle("")
     setAuthor("")
     setPublisher("")
     setPrice("")
+    setFirst(false)
+  }
+
+  const toggleFirst = () => {
+    setFirst(!first)
   }
 
   const attribList = [
@@ -128,7 +138,11 @@ function App() {
           />
         ))}
         <Box>
-          <FormControlLabel control={<Checkbox />} label="First Edition" />
+          <FormControlLabel
+            control={<Checkbox />}
+            onChange={toggleFirst}
+            label="First Edition"
+          />
         </Box>
       </Box>
       <Box m={2} pt={3}>

@@ -4,10 +4,6 @@ import {
   TextField,
   Button,
   Box,
-  Table,
-  TableRow,
-  TableCell,
-  TableHead,
   FormControlLabel,
   Checkbox,
 } from "@mui/material"
@@ -22,7 +18,6 @@ function App() {
   const [author, setAuthor] = useState("")
   const [publisher, setPublisher] = useState("")
   const [price, setPrice] = useState("")
-  const [bookList, setBookList] = useState([])
 
   // For DataGrid:
   const [rows, setRows] = useState([
@@ -83,18 +78,16 @@ function App() {
       setAuthor(e.target.value)
     } else if (e.target.id === "publisher") {
       setPublisher(e.target.value)
+    } else if (e.target.id === "price") {
+      setPrice(e.target.value)
     }
   }
 
   const addBook = () => {
-    setBookList([
-      ...bookList,
-      { title: bookTitle, author: author, publisher: publisher, price: price },
-    ])
     setRows([
       ...rows,
       {
-        id: 1,
+        id: rows.slice(-1)[0].id + 1,
         cover: {
           avatar:
             "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
@@ -161,26 +154,6 @@ function App() {
           experimentalFeatures={{ newEditingApi: true }}
         />
       </div>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {attribList.map((attrib) => (
-              <TableCell key={attrib.label}>{attrib.label}</TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        {bookList.map((book) => (
-          <TableRow
-            key={book.title}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          >
-            <TableCell>{book.title}</TableCell>
-            <TableCell>{book.author}</TableCell>
-            <TableCell>{book.publisher}</TableCell>
-            <TableCell>{book.price}</TableCell>
-          </TableRow>
-        ))}
-      </Table>
     </div>
   )
 }

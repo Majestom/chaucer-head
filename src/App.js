@@ -21,10 +21,11 @@ function App() {
   const [bookTitle, setBookTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [publisher, setPublisher] = useState("")
+  const [price, setPrice] = useState("")
   const [bookList, setBookList] = useState([])
 
   // For DataGrid:
-  const rows = [
+  const [rows, setRows] = useState([
     {
       id: 1,
       cover: {
@@ -48,7 +49,7 @@ function App() {
       publisher: "Orion",
       price: "£2.00",
     },
-  ]
+  ])
 
   // For DataGrid:
   const columns = [
@@ -63,7 +64,7 @@ function App() {
             <img
               alt={params.value.title}
               src={params.value.avatar}
-              Style="max-width:100%; max-height:100%;"
+              Style={"max-width:100%; max-height:100%;"}
             />
           </>
         )
@@ -88,17 +89,34 @@ function App() {
   const addBook = () => {
     setBookList([
       ...bookList,
-      { title: bookTitle, author: author, publisher: publisher },
+      { title: bookTitle, author: author, publisher: publisher, price: price },
+    ])
+    setRows([
+      ...rows,
+      {
+        id: 1,
+        cover: {
+          avatar:
+            "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
+          title: "Strata",
+        },
+        title: bookTitle,
+        author: author,
+        publisher: publisher,
+        price: price,
+      },
     ])
     setBookTitle("")
     setAuthor("")
     setPublisher("")
+    setPrice("")
   }
 
   const attribList = [
     { id: "book-title", label: "Book Title", value: bookTitle },
     { id: "author", label: "Author", value: author },
     { id: "publisher", label: "Publisher", value: publisher },
+    { id: "price", label: "Price", value: price },
   ]
 
   return (
@@ -159,6 +177,7 @@ function App() {
             <TableCell>{book.title}</TableCell>
             <TableCell>{book.author}</TableCell>
             <TableCell>{book.publisher}</TableCell>
+            <TableCell>{book.price}</TableCell>
           </TableRow>
         ))}
       </Table>

@@ -32,6 +32,7 @@ function App() {
       author: "Terry Pratchett",
       publisher: "Orbit",
       price: "£1.00",
+      first: "false",
     },
     {
       id: 2,
@@ -44,6 +45,7 @@ function App() {
       author: "Larry Niven",
       publisher: "Orion",
       price: "£2.00",
+      first: "false",
     },
   ])
 

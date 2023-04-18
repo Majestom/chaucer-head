@@ -42,7 +42,7 @@ export const BookEntry = (props) => {
               color: "warning.dark",
               backgroundColor: "black",
             }}
-            onClick={props.addBook}
+            onClick={props.addBookHandler}
           >
             Add Book
           </Button>

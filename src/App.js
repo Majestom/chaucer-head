@@ -1,7 +1,9 @@
 import "./App.css"
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import { Table } from "./Table"
 import { BookEntry } from "./BookEntry"
+import { addBook } from "./features/books/booksSlice"
 
 const BookRepo = () => {
   return <h1>Chaucer Head Book Repository</h1>
@@ -14,39 +16,13 @@ function App() {
   const [price, setPrice] = useState("")
   const [first, setFirst] = useState(false)
 
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      cover: {
-        avatar: "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
-        title: "Strata",
-      },
-      title: "Strata",
-      author: "Terry Pratchett",
-      publisher: "Orbit",
-      price: "£1.00",
-      first: "false",
-    },
-    {
-      id: 2,
-      cover: {
-        avatar:
-          "https://upload.wikimedia.org/wikipedia/en/7/71/Ringworld%281stEd%29.jpg",
-        title: "Ringworld",
-      },
-      title: "Ringworld",
-      author: "Larry Niven",
-      publisher: "Orion",
-      price: "£2.00",
-      first: "false",
-    },
-  ])
+  const books = useSelector((state) => state.book.books)
+  const dispatch = useDispatch()
 
-  const addBook = () => {
-    setRows([
-      ...rows,
-      {
-        id: rows.slice(-1)[0].id + 1,
+  const addBookHandler = () => {
+    dispatch(
+      addBook({
+        id: books.slice(-1)[0].id + 1,
         cover: {
           avatar:
             "https://www.lspace.org/ftp/images/bookcovers/uk/strata-2.jpg",
@@ -57,8 +33,9 @@ function App() {
         publisher: publisher,
         price: price,
         first: first,
-      },
-    ])
+      })
+    )
+
     setBookTitle("")
     setAuthor("")
     setPublisher("")
@@ -94,12 +71,11 @@ function App() {
         price={price}
         updateCell={updateCell}
         toggleFirst={toggleFirst}
-        addBook={addBook}
+        addBookHandler={addBookHandler}
       />
-
       <div style={{ height: 350, width: "100%" }}>
         <Table
-          rows={rows}
+          rows={books}
           addBook={addBook}
           bookTitle={bookTitle}
           author={author}
